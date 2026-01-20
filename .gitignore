@@ -7,7 +7,3 @@ venv/
 # Ignore cache
 __pycache__/
 .ipynb_checkpoints/
-
-# Ignore large model files (optional)
-*.h5
-*.keras
