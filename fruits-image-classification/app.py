@@ -1,3 +1,4 @@
+import os
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import streamlit as st
@@ -51,33 +52,46 @@ st.markdown("""
         font-size: 16px;
         font-weight: bold;
     }
-    .stButton button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
 </style>
 """, unsafe_allow_html=True)
 
 # -------------------- HEADER --------------------
 st.markdown('<div class="main-header">', unsafe_allow_html=True)
 st.markdown("# 🍎 Fruit & Vegetable Classifier")
-st.markdown("**CNN-based Image Classification Model**")
+st.markdown("**CNN-based Image Classification Web App**")
 st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
-# -------------------- SIMPLE ABOUT --------------------
+# -------------------- ABOUT SECTION --------------------
 with st.expander("ℹ️ About this Project", expanded=True):
     st.markdown("""
-    - **Model**: Custom CNN trained on 36 fruits & vegetables
-    - **Tech Stack**: TensorFlow, Keras, Streamlit
-    - **Purpose**: Demonstrate end-to-end deep learning application
-    """)
+**What is CNN?**  
+A **Convolutional Neural Network (CNN)** is a deep learning model designed to
+automatically learn visual features such as edges, textures, and shapes from images.
 
-# -------------------- LOAD MODEL --------------------
+**What this app does**
+- Accepts an image of a fruit or vegetable
+- Processes it using a trained CNN
+- Predicts the correct category with confidence
+
+**Model Details**
+- Custom CNN architecture
+- Trained on **36 fruit & vegetable classes**
+- Input size: `180 × 180 RGB`
+
+**Tech Stack**
+- TensorFlow & Keras (Model)
+- Streamlit (UI & Deployment)
+""")
+
+# -------------------- LOAD MODEL (DEPLOY SAFE) --------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "model", "image_classifier.keras")
+
 @st.cache_resource
 def load_cnn_model():
-    return load_model("model/image_classifier.keras")
+    return load_model(MODEL_PATH)
 
 model = load_cnn_model()
 
@@ -94,58 +108,56 @@ data_cat = [
 IMG_HEIGHT = 180
 IMG_WIDTH = 180
 
-# -------------------- MAIN INTERFACE --------------------
-st.markdown("### 📷 Upload Image")
+# -------------------- IMAGE UPLOAD --------------------
+st.markdown("### 📷 Upload an Image")
 st.markdown('<div class="upload-area">', unsafe_allow_html=True)
+
 uploaded_image = st.file_uploader(
-    "Drag and drop or click to browse",
+    "Upload image",
     type=["jpg", "jpeg", "png"],
     label_visibility="collapsed"
 )
+
 st.markdown('</div>', unsafe_allow_html=True)
 
-# -------------------- PREDICTION SECTION --------------------
+# -------------------- PREDICTION --------------------
 if uploaded_image is not None:
-    col1, col2 = st.columns([1, 1])
-    
+    col1, col2 = st.columns(2)
+
     with col1:
         image = Image.open(uploaded_image).convert("RGB")
-        st.image(image, caption="Your Image", use_container_width=True)
-    
+        st.image(image, caption="Uploaded Image", use_container_width=True)
+
     with col2:
-        if st.button("🔍 Classify Image", type="primary"):
-            # Preprocess image
+        if st.button("🔍 Classify Image"):
             image_resized = image.resize((IMG_WIDTH, IMG_HEIGHT))
             img_arr = np.array(image_resized)
             img_bat = np.expand_dims(img_arr, 0)
-            
-            # Make prediction
-            with st.spinner("Analyzing..."):
-                predict = model.predict(img_bat)
-                score = tf.nn.softmax(predict)
-            
+
+            with st.spinner("Analyzing image using CNN..."):
+                prediction = model.predict(img_bat)
+                score = tf.nn.softmax(prediction)
+
             predicted_class = data_cat[np.argmax(score)]
             confidence = np.max(score) * 100
-            
-            # Display results
+
             st.markdown('<div class="prediction-card">', unsafe_allow_html=True)
-            st.markdown(f"### 🎯 **{predicted_class.capitalize()}**")
-            st.markdown(f"**Confidence: {confidence:.1f}%**")
-            
-            # Confidence bar
+            st.markdown(f"### 🎯 Prediction: **{predicted_class.capitalize()}**")
+            st.markdown(f"**Confidence: {confidence:.2f}%**")
+
             st.markdown(f"""
-            <div style="width: 100%; background: rgba(255,255,255,0.2); border-radius: 10px;">
-                <div class="confidence-bar" style="width: {confidence}%;"></div>
+            <div style="width:100%; background:rgba(255,255,255,0.2); border-radius:10px;">
+                <div class="confidence-bar" style="width:{confidence}%;"></div>
             </div>
             """, unsafe_allow_html=True)
+
             st.markdown('</div>', unsafe_allow_html=True)
-            
-            # Categories list
-            with st.expander("📋 All Categories"):
+
+            with st.expander("📋 Supported Categories"):
                 cols = st.columns(3)
                 for i, cat in enumerate(data_cat):
                     cols[i % 3].write(f"• {cat}")
 
-# -------------------- MINIMAL FOOTER --------------------
+# -------------------- FOOTER --------------------
 st.divider()
-st.caption("Deep Learning Project | CNN Image Classification")
+st.caption("🚀 Deep Learning Project | CNN Image Classification | Streamlit Deployment")
