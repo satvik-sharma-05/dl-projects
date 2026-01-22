@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: kidney_disease_classification
+Version: 0.0.0
+Summary: End-to-end Deep Learning project with MLOps (DVC, MLflow, Deployment)
+Home-page: https://github.com/satvik-sharma-05/dl-projects
+Author: satvik-sharma-05
+Author-email: ssharma8_be23@thapar.edu
+Project-URL: Bug Tracker, https://github.com/satvik-sharma-05/dl-projects/issues
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: project-url
+Dynamic: requires-python
+Dynamic: summary
