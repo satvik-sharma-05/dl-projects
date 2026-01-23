@@ -21,7 +21,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """Read YAML file and return ConfigBox"""
 
     try:
-        with open(path_to_yaml, "r") as yaml_file:
+        with open(path_to_yaml, "r", encoding="utf-8") as yaml_file:
             content = yaml.safe_load(yaml_file)
 
             if content is None:
@@ -34,6 +34,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         raise ValueError("YAML file is empty")
     except Exception as e:
         raise e
+
 
 
 
