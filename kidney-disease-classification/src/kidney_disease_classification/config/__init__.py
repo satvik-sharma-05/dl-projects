@@ -1,0 +1,1 @@
+from kidney_disease_classification.entity.config_entity import DataIngestionConfig

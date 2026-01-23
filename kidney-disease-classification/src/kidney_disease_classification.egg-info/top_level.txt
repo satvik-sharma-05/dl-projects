@@ -1,1 +1,1 @@
-kidney-disease-classification
+kidney_disease_classification

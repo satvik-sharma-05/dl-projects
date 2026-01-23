@@ -1,0 +1,18 @@
+AUGMENTATION: true
+
+IMAGE_SIZE:
+  - 224
+  - 224
+  - 3   # Required for VGG / ResNet / EfficientNet
+
+BATCH_SIZE: 16
+
+INCLUDE_TOP: false   # Important for transfer learning
+
+EPOCHS: 200           # 1 epoch is too low for real training
+
+CLASSES: 2           # Binary classification
+
+WEIGHTS: imagenet
+
+LEARNING_RATE: 0.0001

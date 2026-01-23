@@ -1,0 +1,1 @@
+from kidney_disease_classification.components.data_ingestion import DataIngestion
