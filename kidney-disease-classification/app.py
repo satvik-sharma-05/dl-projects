@@ -2,7 +2,7 @@ import streamlit as st
 import tempfile
 from PIL import Image
 
-from kidney_disease_classification.pipeline.prediction import PredictionPipeline
+from src.kidney_disease_classification.pipeline.prediction import PredictionPipeline
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(

@@ -32,15 +32,12 @@ Flask-Cors>=3.0
 # Data download
 gdown>=4.7
 
-# Local package
--e .
+
 
 streamlit
-tensorflow
-numpy
+
 pillow
-python-box
+
 pyyaml
-ensure
-mlflow
-dvc
+
+
