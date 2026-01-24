@@ -342,7 +342,6 @@ data/
 # Model files (keep small ones, ignore large ones)
 ##################################
 *.keras
-*.h5
 *.pb
 saved_model/
 saved_model.pb
