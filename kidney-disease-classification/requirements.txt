@@ -34,3 +34,13 @@ gdown>=4.7
 
 # Local package
 -e .
+
+streamlit
+tensorflow
+numpy
+pillow
+python-box
+pyyaml
+ensure
+mlflow
+dvc

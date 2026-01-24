@@ -126,3 +126,7 @@ dmypy.json
 *.env
 secrets.yaml
 credentials.json
+
+
+*.keras
+model/

@@ -22,3 +22,6 @@ training:
 evaluation:
   root_dir: artifacts/evaluation
   score_file: artifacts/evaluation/scores.json
+
+evaluation:
+  mlflow_uri: https://dagshub.com/entbappy/Kidney-Disease-Classification-MLflow-DVC.mlflow

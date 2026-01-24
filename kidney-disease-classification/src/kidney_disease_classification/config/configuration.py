@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from kidney_disease_classification.constants import (
@@ -10,6 +11,7 @@ from kidney_disease_classification.utils.common import (
 )
 from kidney_disease_classification.entity.config_entity import (
     DataIngestionConfig,
+    EvaluationConfig,
     PrepareBaseModelConfig,
     TrainingConfig
 )
@@ -86,3 +88,20 @@ class ConfigurationManager:
             params_is_augmentation=self.params.AUGMENTATION,
             params_image_size=self.params.IMAGE_SIZE,
         )
+    # =========================
+    # Model Evaluation
+    # =========================
+
+    def get_evaluation_config(self) -> EvaluationConfig:
+        evaluation = self.config.evaluation
+
+        return EvaluationConfig(
+        path_of_model=Path("artifacts/training/model.h5"),
+        training_data=Path(self.config.data_ingestion.unzip_dir) / "kidney-ct-scan-image",
+        all_params=self.params,
+        mlflow_uri=evaluation.mlflow_uri,  # ✅ FIX
+        params_image_size=self.params.IMAGE_SIZE,
+        params_batch_size=self.params.BATCH_SIZE
+    )
+
+

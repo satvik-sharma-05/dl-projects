@@ -9,17 +9,14 @@ from kidney_disease_classification.pipeline.stage_02_prepare_base_model import (
 from kidney_disease_classification.pipeline.stage_03_model_training import (
     ModelTrainingPipeline
 )
+from kidney_disease_classification.pipeline.stage_04_model_evaluation import (
+    ModelEvaluationPipeline
+)
 
 from kidney_disease_classification.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 
-print("CONFIG:", CONFIG_FILE_PATH)
-print("PARAMS:", PARAMS_FILE_PATH)
-
 
 def run_stage(stage_name: str, pipeline_class):
-    """
-    Utility function to run a pipeline stage safely
-    """
     try:
         logger.info("*******************")
         logger.info(f">>>>>> Stage: {stage_name} started <<<<<<")
@@ -36,26 +33,10 @@ def run_stage(stage_name: str, pipeline_class):
 
 if __name__ == "__main__":
 
-    # ============================
-    # Stage 01: Data Ingestion
-    # ============================
-    run_stage(
-        stage_name="Data Ingestion",
-        pipeline_class=DataIngestionTrainingPipeline
-    )
+    print("CONFIG:", CONFIG_FILE_PATH)
+    print("PARAMS:", PARAMS_FILE_PATH)
 
-    # ============================
-    # Stage 02: Prepare Base Model
-    # ============================
-    run_stage(
-        stage_name="Prepare Base Model",
-        pipeline_class=PrepareBaseModelTrainingPipeline
-    )
-
-    # ============================
-    # Stage 03: Model Training
-    # ============================
-    run_stage(
-        stage_name="Model Training",
-        pipeline_class=ModelTrainingPipeline
-    )
+    run_stage("Data Ingestion", DataIngestionTrainingPipeline)
+    run_stage("Prepare Base Model", PrepareBaseModelTrainingPipeline)
+    run_stage("Model Training", ModelTrainingPipeline)
+    run_stage("Model Evaluation", ModelEvaluationPipeline)
