@@ -6,76 +6,86 @@ from kidney_disease_classification.pipeline.prediction import PredictionPipeline
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
-    page_title="Kidney CT Scan Classifier",
-    page_icon="🧠",
+    page_title="KidneyScan AI",
+    page_icon="🩺",
     layout="centered"
 )
 
-st.title("🧠 Kidney CT Scan Classification")
-st.caption("AI-assisted screening tool (Educational use only)")
-
-st.markdown("---")
-
-# ---------------- USER GUIDANCE ----------------
-st.info(
+# ---------------- HEADER ----------------
+st.markdown(
     """
-**How predictions work:**
-
-- ✅ **Confidence ≥ 70%** → Model prediction is shown (Normal / Tumor)
-- ⚠️ **Confidence < 70%** → Marked as **Uncertain**
-- This helps **reduce medical risk** and false confidence
-
-⚠️ **This tool is NOT a medical diagnosis. Always consult a doctor.**
-"""
+    <h1 style="text-align:center;">🩺 KidneyScan AI</h1>
+    <p style="text-align:center;">
+    AI-based Kidney CT Scan Classification (Educational Use)
+    </p>
+    """,
+    unsafe_allow_html=True
 )
 
-# ---------------- FILE UPLOAD ----------------
+st.divider()
+
+# ---------------- INFO BOX ----------------
+st.info("""
+### 🔍 How Prediction Works
+- The model predicts **Normal** or **Tumor**
+- Confidence ≥ **70%** → Reliable prediction
+- Confidence < **70%** → **Uncertain (manual review recommended)**
+
+⚠️ This tool is **NOT for medical diagnosis**
+""")
+
+# ---------------- UPLOAD ----------------
 uploaded_file = st.file_uploader(
-    "Upload a Kidney CT Scan image",
+    "Upload a Kidney CT Scan Image",
     type=["jpg", "jpeg", "png"]
 )
 
 if uploaded_file:
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", width=700)
+    st.image(image, caption="Uploaded Image", width=350)
 
+    # Save temp file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp:
         tmp.write(uploaded_file.getbuffer())
         image_path = tmp.name
 
+    # ---------------- PREDICTION ----------------
+    with st.spinner("Analyzing image..."):
+        predictor = PredictionPipeline(image_path)
+        result = predictor.predict()
 
-    st.markdown("---")
-    st.subheader("🧪 Prediction Result")
-
-    predictor = PredictionPipeline(image_path)
-    result = predictor.predict()
-
-    # ---------------- RESULTS ----------------
+    prediction = result["prediction"]
     confidence = result["confidence"]
 
-    if result["prediction"] == "Tumor":
-        st.error(f"🧠 Prediction: **Tumor**")
-    elif result["prediction"] == "Normal":
-        st.success(f"🧠 Prediction: **Normal**")
+    st.divider()
+
+    # ---------------- RESULT CARD ----------------
+    if confidence >= 70:
+        if prediction == "Tumor":
+            st.error(f"🧠 **Prediction:** Tumor\n\n📊 **Confidence:** {confidence}%")
+        else:
+            st.success(f"🧠 **Prediction:** Normal\n\n📊 **Confidence:** {confidence}%")
     else:
-        st.warning("🧠 Prediction: **Uncertain**")
+        st.warning(
+            f"""
+            ⚠️ **Uncertain Prediction**
+            
+            - Model confidence is **{confidence}% (<70%)**
+            - Image may be unclear or ambiguous
+            - Manual review recommended
+            """
+        )
 
-    st.metric("Confidence", f"{confidence}%")
-    st.progress(int(confidence))
+    # ---------------- PROBABILITIES ----------------
+    st.subheader("📈 Class Probabilities")
+    st.progress(result["normal_prob"] / 100)
+    st.write(f"Normal: **{result['normal_prob']}%**")
 
-    # Show class probabilities
-    with st.expander("🔍 Detailed Probabilities"):
-        st.write(f"Normal: **{result['normal_prob']}%**")
-        st.write(f"Tumor: **{result['tumor_prob']}%**")
+    st.progress(result["tumor_prob"] / 100)
+    st.write(f"Tumor: **{result['tumor_prob']}%**")
 
-    # ---------------- DISCLAIMER ----------------
-    st.markdown("---")
-    st.warning(
-        """
-⚠️ **Medical Disclaimer**
-
-This AI model is trained on limited public data  
-It **cannot replace professional medical diagnosis**  
-Use this tool only for learning and experimentation
-"""
-    )
+# ---------------- FOOTER ----------------
+st.divider()
+st.caption(
+    "⚠️ Educational project only • Not a medical device • Built with TensorFlow & Streamlit"
+)

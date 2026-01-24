@@ -1,43 +1,40 @@
 import numpy as np
-import os
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
+from pathlib import Path
 
 
 class PredictionPipeline:
-    def __init__(self, filename: str):
-        self.filename = filename
+    def __init__(self, image_path: str):
+        self.image_path = image_path
+        self.model_path = Path("artifacts/training/model.h5")
 
     def predict(self):
         # Load trained model
-        model_path = os.path.join("artifacts", "training", "model.h5")
-        model = tf.keras.models.load_model(model_path)
+        model = tf.keras.models.load_model(self.model_path)
 
-        # Load & preprocess image
-        img = image.load_img(self.filename, target_size=(224, 224))
-        img_array = image.img_to_array(img)
-        img_array = img_array / 255.0  # 🔴 VERY IMPORTANT
+        # Preprocess image
+        img = image.load_img(self.image_path, target_size=(224, 224))
+        img_array = image.img_to_array(img) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
 
         # Predict
-        preds = model.predict(img_array)[0]
+        probs = model.predict(img_array)[0]
 
-        normal_prob = float(preds[0])
-        tumor_prob = float(preds[1])
+        normal_prob = float(probs[0]) * 100
+        tumor_prob = float(probs[1]) * 100
 
-        confidence = max(normal_prob, tumor_prob) * 100
-
-        # Decision logic
-        if confidence < 70:
-            prediction = "Uncertain ⚠️"
-        elif tumor_prob > normal_prob:
+        # Decision
+        if tumor_prob > normal_prob:
             prediction = "Tumor"
+            confidence = tumor_prob
         else:
             prediction = "Normal"
+            confidence = normal_prob
 
         return {
             "prediction": prediction,
             "confidence": round(confidence, 2),
-            "normal_prob": round(normal_prob * 100, 2),
-            "tumor_prob": round(tumor_prob * 100, 2)
+            "normal_prob": round(normal_prob, 2),
+            "tumor_prob": round(tumor_prob, 2)
         }
