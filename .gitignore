@@ -337,7 +337,6 @@ data/
 *.pkl
 *.pickle
 *.hdf5
-*.h5
 
 ##################################
 # Model files (keep small ones, ignore large ones)
