@@ -7,7 +7,9 @@ from pathlib import Path
 class PredictionPipeline:
     def __init__(self, image_path: str):
         self.image_path = image_path
-        self.model = tf.keras.models.load_model("model/model.h5")
+
+        model_path = Path(__file__).resolve().parents[3] / "model" / "kidney_model.h5"
+        self.model = tf.keras.models.load_model(model_path)
 
     def predict(self):
         img = image.load_img(self.image_path, target_size=(224, 224))
@@ -20,8 +22,8 @@ class PredictionPipeline:
         normal_prob = float(probs[0] * 100)
         tumor_prob = float(probs[1] * 100)
 
-        confidence = max(normal_prob, tumor_prob)
         prediction = "Tumor" if tumor_prob > normal_prob else "Normal"
+        confidence = max(normal_prob, tumor_prob)
 
         return {
             "prediction": prediction,

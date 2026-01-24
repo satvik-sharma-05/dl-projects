@@ -129,4 +129,4 @@ credentials.json
 
 
 *.keras
-model/
+# model/
