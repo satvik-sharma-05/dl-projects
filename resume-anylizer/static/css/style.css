@@ -14,23 +14,39 @@ h1, h2, h3, h4, h5, h6 {
 /* Main app background */
 .stApp {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    padding-top: 0 !important;
 }
 
-/* Header container */
-.st-emotion-cache-1y4p8pa {
+/* FIXED: Header styling - Targets the main header container */
+.main .block-container {
+    padding-top: 2rem !important;
+}
+
+/* Custom header styling */
+.custom-header-container {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
     color: white !important;
+    padding: 3rem 2rem !important;
     border-radius: 0 0 30px 30px !important;
     box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2) !important;
     margin-bottom: 2rem !important;
-    padding: 2rem 1rem !important;
     text-align: center !important;
+    width: 100% !important;
+    margin-top: -3rem !important;
+    position: relative !important;
+    z-index: 999 !important;
+}
+
+/* Main content container - push down */
+.st-emotion-cache-1y4p8pa {
+    padding-top: 0 !important;
 }
 
 /* Sidebar styling */
 section[data-testid="stSidebar"] {
     background: white !important;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05) !important;
+    padding-top: 5rem !important;
 }
 
 section[data-testid="stSidebar"] > div {
@@ -250,14 +266,30 @@ div[data-testid="stFileUploader"]:hover {
 }
 
 /* Custom classes for your HTML elements */
-.custom-header {
+.custom-header-content {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
     color: white !important;
-    padding: 2rem !important;
-    border-radius: 20px !important;
+    padding: 3rem 2rem !important;
+    border-radius: 0 0 30px 30px !important;
     box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2) !important;
-    margin-bottom: 2rem !important;
+    margin: -2rem -1rem 2rem -1rem !important;
     text-align: center !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+.custom-header-content h1 {
+    color: white !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 700 !important;
+}
+
+.custom-header-content p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
 }
 
 .custom-metric-card {
@@ -302,16 +334,46 @@ div[data-testid="stFileUploader"]:hover {
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
 }
 
+/* Push content down under header */
+.st-emotion-cache-1y4p8pa, 
+.st-emotion-cache-1jicfl2 {
+    padding-top: 0 !important;
+}
+
+/* Fix for main content area */
+[data-testid="stMainBlockContainer"] {
+    padding-top: 0 !important;
+}
+
+/* Header wrapper */
+.header-wrapper {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    padding: 3rem 0 !important;
+    border-radius: 0 0 30px 30px !important;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2) !important;
+    margin: -2rem -1rem 2rem -1rem !important;
+    text-align: center !important;
+    position: relative !important;
+    z-index: 999 !important;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
-    .st-emotion-cache-1y4p8pa {
-        padding: 1.5rem 1rem !important;
+    .header-wrapper,
+    .custom-header-content {
+        padding: 2rem 1rem !important;
         border-radius: 0 0 20px 20px !important;
+        margin: -1.5rem -0.5rem 1.5rem -0.5rem !important;
     }
     
-    .custom-header {
-        padding: 1.5rem !important;
-        border-radius: 15px !important;
+    .custom-header-content h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .custom-header-content p {
+        font-size: 1rem !important;
+        padding: 0 1rem !important;
     }
     
     .stTabs [data-baseweb="tab"] {
@@ -322,4 +384,41 @@ div[data-testid="stFileUploader"]:hover {
     .custom-upload-box {
         padding: 2rem !important;
     }
+    
+    section[data-testid="stSidebar"] {
+        padding-top: 4rem !important;
+    }
+}
+
+/* Ensure content starts after header */
+.st-emotion-cache-1y4p8pa {
+    margin-top: -2rem !important;
+}
+
+/* Alternative: Use a full-width container approach */
+.full-width-header {
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    padding: 3rem 0 !important;
+    border-radius: 0 0 30px 30px !important;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2) !important;
+    margin-bottom: 2rem !important;
+    text-align: center !important;
+}
+
+/* Simple header fix - Use this if above doesn't work */
+.header-fix {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    padding: 2rem !important;
+    border-radius: 15px !important;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2) !important;
+    margin-bottom: 2rem !important;
+    text-align: center !important;
 }

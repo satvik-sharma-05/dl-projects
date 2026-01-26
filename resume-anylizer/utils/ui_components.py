@@ -218,74 +218,14 @@ def create_recommendation_card(type_, message, action, priority=1):
     """
 
 def create_beautiful_header():
-    """Create a beautiful modern header"""
+    """Create beautiful header with proper styling"""
     st.markdown("""
-    <div class="main-header">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 1rem;">
-            <div style="
-                background: rgba(255, 255, 255, 0.2);
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                backdrop-filter: blur(10px);
-                border: 3px solid rgba(255, 255, 255, 0.3);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            ">
-                <span style="font-size: 2.5rem;">🤖</span>
-            </div>
-            <div style="text-align: left;">
-                <h1 style="margin: 0; font-size: 2.5rem; font-weight: 700; color: white;">
-                    AI Resume Analyzer Pro
-                </h1>
-                <p style="margin: 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.9);">
-                    Advanced NLP-powered resume analysis with Indian context support
-                </p>
+        <div class="header-wrapper">
+            <div class="custom-header-content">
+                <h1>🎯 AI Resume Analyzer Pro</h1>
+                <p>Get detailed insights, ATS scores, and personalized career recommendations powered by advanced NLP</p>
             </div>
         </div>
-        <div style="
-            display: inline-flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 1rem;
-        ">
-            <span style="
-                background: rgba(255, 255, 255, 0.2);
-                padding: 6px 15px;
-                border-radius: 20px;
-                font-size: 0.9rem;
-                color: white;
-                backdrop-filter: blur(10px);
-            ">✅ Advanced NLP</span>
-            <span style="
-                background: rgba(255, 255, 255, 0.2);
-                padding: 6px 15px;
-                border-radius: 20px;
-                font-size: 0.9rem;
-                color: white;
-                backdrop-filter: blur(10px);
-            ">🇮🇳 Indian Context</span>
-            <span style="
-                background: rgba(255, 255, 255, 0.2);
-                padding: 6px 15px;
-                border-radius: 20px;
-                font-size: 0.9rem;
-                color: white;
-                backdrop-filter: blur(10px);
-            ">🎯 ATS Score</span>
-            <span style="
-                background: rgba(255, 255, 255, 0.2);
-                padding: 6px 15px;
-                border-radius: 20px;
-                font-size: 0.9rem;
-                color: white;
-                backdrop-filter: blur(10px);
-            ">🤖 ML Recommendations</span>
-        </div>
-    </div>
     """, unsafe_allow_html=True)
 
 def create_beautiful_sidebar():
