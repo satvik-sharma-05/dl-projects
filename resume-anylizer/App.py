@@ -2,6 +2,10 @@
 AI Resume Analyzer with Advanced NLP Features
 Revised version with FIXED parser integration and Beautiful UI
 """
+from setup_nlp import setup_all
+setup_all()
+
+
 import os
 import subprocess
 
