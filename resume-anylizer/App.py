@@ -2,16 +2,9 @@
 AI Resume Analyzer with Advanced NLP Features
 Revised version with FIXED parser integration and Beautiful UI
 """
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
-
-import os
-import subprocess
-
-try:
-    import spacy
-    spacy.load("en_core_web_sm")
-except:
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
 
 import streamlit as st
 
