@@ -9,27 +9,8 @@ import os
 
 def load_css():
     """Load custom CSS"""
-    css_file = os.path.join('static', 'css', 'style.css')
-    if os.path.exists(css_file):
-        with open(css_file, 'r') as f:
-            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-    else:
-        # Fallback inline CSS
-        st.markdown("""
-        <style>
-        .stApp {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .main-header {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        </style>
-        """, unsafe_allow_html=True)
-
+    css = """<paste the CSS above here>"""
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 def create_header():
     """Create beautiful header with logo and title"""
     col1, col2, col3 = st.columns([1, 2, 1])
