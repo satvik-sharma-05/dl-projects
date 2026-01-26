@@ -1,4 +1,4 @@
-/* Modern Resume Analyzer UI - Enhanced Version */
+/* Modern Resume Analyzer UI – Streamlit Safe Version */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 /* Root variables */
@@ -15,336 +15,158 @@
     --gray-light: #e5e7eb;
 }
 
-/* Base styles */
-* {
-    font-family: 'Inter', sans-serif;
-}
+/* Base */
+* { font-family: 'Inter', sans-serif; }
+h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', sans-serif; }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Main app background */
-.stApp {
+/* App background */
+div[data-testid="stAppViewContainer"] {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     min-height: 100vh;
 }
 
-/* Header styling */
+/* Header */
 .main-header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     padding: 3rem 2rem;
     border-radius: 0 0 30px 30px;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 10px 30px rgba(99,102,241,.25);
     margin-bottom: 2rem;
     text-align: center;
 }
 
-/* Sidebar styling */
-.css-1d391kg {
+/* Sidebar */
+section[data-testid="stSidebar"] {
     background: white;
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 5px 0 15px rgba(0,0,0,0.05);
 }
 
-.css-1d391kg .stSelectbox, 
-.css-1d391kg .stTextInput,
-.css-1d391kg .stButton {
-    background: white;
+/* Cards / Containers */
+div[data-testid="stVerticalBlock"] > div {
+    background: rgba(255,255,255,0.96);
+    border-radius: 20px;
+    border: 1px solid rgba(229,231,235,.8);
+    box-shadow: 0 5px 20px rgba(0,0,0,.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: .3s ease;
 }
 
-/* Card containers */
-.css-1r6slb0, 
-.css-1xarl3l,
-.css-keje6w {
-    background: white !important;
-    border-radius: 20px !important;
-    border: 1px solid rgba(229, 231, 235, 0.8) !important;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05) !important;
-    padding: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
-    transition: all 0.3s ease !important;
-}
-
-.css-1r6slb0:hover,
-.css-1xarl3l:hover,
-.css-keje6w:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+div[data-testid="stVerticalBlock"] > div:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,.1);
 }
 
 /* Metric cards */
-.css-1xarl3l {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
-    color: white !important;
-    border: none !important;
+div[data-testid="metric-container"] {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 16px;
+    padding: 1.5rem;
 }
+div[data-testid="metric-container"] * { color: white !important; }
 
 /* Buttons */
 .stButton > button {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
-    color: white !important;
-    border: none !important;
-    padding: 0.75rem 2rem !important;
-    border-radius: 12px !important;
-    font-weight: 600 !important;
-    font-size: 1rem !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3) !important;
-    width: 100% !important;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 12px;
+    padding: .75rem 2rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(99,102,241,.3);
+    transition: .3s ease;
+    width: 100%;
 }
-
 .stButton > button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99,102,241,.4);
 }
 
-/* Primary button */
-.stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+/* Progress bar */
+.stProgress div div div {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 10px;
 }
 
-/* Secondary button */
-.stButton > button[kind="secondary"] {
-    background: linear-gradient(135deg, var(--gray) 0%, var(--dark) 100%) !important;
-}
-
-/* Progress bars */
-.stProgress > div > div > div {
-    background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
-    border-radius: 10px !important;
-}
-
-/* Tabs - Enhanced */
+/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
-    gap: 2px;
-    background-color: var(--light);
+    background: var(--light);
     padding: 4px;
     border-radius: 15px;
-    margin-bottom: 1.5rem;
 }
-
 .stTabs [data-baseweb="tab"] {
-    border-radius: 12px;
     padding: 12px 24px;
+    border-radius: 12px;
     font-weight: 600;
-    background-color: transparent;
     color: var(--gray);
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
 }
-
-.stTabs [data-baseweb="tab"]:hover {
-    background-color: rgba(99, 102, 241, 0.1);
-    color: var(--primary);
-}
-
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
 /* File uploader */
-.stFileUploader > div {
-    border: 3px dashed rgba(99, 102, 241, 0.3) !important;
-    border-radius: 20px !important;
-    background: rgba(255, 255, 255, 0.9) !important;
-    padding: 3rem !important;
-    transition: all 0.3s ease !important;
+div[data-testid="stFileUploader"] > div {
+    border: 3px dashed rgba(99,102,241,.3);
+    border-radius: 20px;
+    background: rgba(255,255,255,.95);
+    padding: 3rem;
 }
 
-.stFileUploader > div:hover {
-    border-color: var(--primary) !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1) !important;
-}
-
-/* Text areas and inputs */
+/* Inputs */
+.stTextInput > div > div,
 .stTextArea > div > div,
-.stTextInput > div > div {
-    border-radius: 15px !important;
-    border: 2px solid var(--gray-light) !important;
-    background: white !important;
-    transition: all 0.3s ease !important;
-}
-
-.stTextArea > div > div:focus-within,
-.stTextInput > div > div:focus-within {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
-}
-
-/* Expandable sections */
-.streamlit-expanderHeader {
-    background: var(--light) !important;
-    border-radius: 12px !important;
-    font-weight: 600 !important;
-    color: var(--dark) !important;
-    border: 1px solid var(--gray-light) !important;
-    padding: 1rem 1.25rem !important;
-}
-
-.streamlit-expanderHeader:hover {
-    background: white !important;
-    border-color: var(--primary) !important;
-}
-
-.streamlit-expanderContent {
-    background: white !important;
-    border-radius: 0 0 12px 12px !important;
-    padding: 1.5rem !important;
-}
-
-/* Alert/Notification boxes */
-.stAlert {
-    border-radius: 15px !important;
-    border: none !important;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Success alerts */
-.stAlert [data-testid="stMarkdownContainer"] {
-    color: var(--success) !important;
-}
-
-/* Info alerts */
-div[data-baseweb="notification"][kind="info"] {
-    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
-    color: white !important;
-}
-
-/* Warning alerts */
-div[data-baseweb="notification"][kind="warning"] {
-    background: linear-gradient(135deg, var(--warning) 0%, #fbbf24 100%) !important;
-    color: white !important;
-}
-
-/* Error alerts */
-div[data-baseweb="notification"][kind="error"] {
-    background: linear-gradient(135deg, var(--danger) 0%, #f87171 100%) !important;
-    color: white !important;
-}
-
-/* Metric values */
-.css-1xarl3l > div > div {
-    color: white !important;
-    font-size: 2rem !important;
-    font-weight: 700 !important;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--light);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
-}
-
-/* Badge styling */
-[data-testid="stBadge"] {
-    border-radius: 20px !important;
-    padding: 4px 12px !important;
-    font-weight: 500 !important;
-}
-
-/* Tooltips */
-[data-baseweb="tooltip"] {
-    border-radius: 10px !important;
-    padding: 10px 15px !important;
-    font-size: 0.9rem !important;
-}
-
-/* Dataframe styling */
-[data-testid="stDataFrame"] {
-    border-radius: 15px !important;
-    overflow: hidden !important;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Divider lines */
-hr {
-    border: none;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gray-light), transparent);
-    margin: 2rem 0;
-}
-
-/* Loading spinner */
-[data-testid="stSpinner"] {
-    border-color: var(--primary) var(--primary) transparent transparent !important;
-}
-
-/* Selectbox dropdowns */
 .stSelectbox > div > div {
-    border-radius: 12px !important;
-    border: 2px solid var(--gray-light) !important;
+    border-radius: 15px;
+    border: 2px solid var(--gray-light);
+    background: white;
+}
+.stTextInput > div > div:focus-within,
+.stTextArea > div > div:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99,102,241,.1);
 }
 
-.stSelectbox > div > div:hover {
-    border-color: var(--primary) !important;
+/* Expanders */
+.streamlit-expanderHeader {
+    background: var(--light);
+    border-radius: 12px;
+    border: 1px solid var(--gray-light);
+    font-weight: 600;
+}
+.streamlit-expanderContent {
+    background: white;
+    padding: 1.5rem;
 }
 
-/* Radio buttons */
-.stRadio > div {
-    border: 2px solid var(--gray-light) !important;
-    border-radius: 12px !important;
-    padding: 10px !important;
+/* Alerts */
+div[data-baseweb="notification"][kind="info"] {
+    background: linear-gradient(135deg,#3b82f6,#60a5fa);
+    color: white;
+}
+div[data-baseweb="notification"][kind="warning"] {
+    background: linear-gradient(135deg,var(--warning),#fbbf24);
+}
+div[data-baseweb="notification"][kind="error"] {
+    background: linear-gradient(135deg,var(--danger),#f87171);
 }
 
-/* Checkboxes */
-.stCheckbox > label {
-    border: 2px solid var(--gray-light) !important;
-    border-radius: 8px !important;
-    padding: 8px 12px !important;
+/* DataFrame */
+[data-testid="stDataFrame"] {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.05);
 }
 
-/* Video player */
-video {
-    border-radius: 15px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg,var(--primary),var(--secondary));
+    border-radius: 10px;
 }
 
-/* Plotly charts */
-.js-plotly-plot {
-    border-radius: 15px !important;
-    overflow: hidden !important;
-}
-
-/* Success message boxes */
-div[data-baseweb="toast"] {
-    border-radius: 15px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
-}
-
-/* Responsive adjustments */
+/* Mobile */
 @media (max-width: 768px) {
-    .main-header {
-        padding: 2rem 1rem;
-        border-radius: 0 0 20px 20px;
-    }
-    
-    .css-1r6slb0,
-    .css-1xarl3l,
-    .css-keje6w {
-        padding: 1rem !important;
-        border-radius: 15px !important;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-    }
+    .main-header { padding: 2rem 1rem; }
+    div[data-testid="stVerticalBlock"] > div { padding: 1rem; }
 }

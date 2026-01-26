@@ -491,6 +491,22 @@ def display_enhanced_metrics(match_results):
         )
 
 
+def create_skill_badge(skill, color="#6B7280"):
+    return f"""
+    <span style="
+        display:inline-block;
+        background:{color}15;
+        color:{color};
+        padding:6px 16px;
+        border-radius:20px;
+        margin:4px;
+        font-size:0.9rem;
+        font-weight:500;
+        border:1px solid {color}30;
+    ">
+        {skill}
+    </span>
+    """
 
 def display_beautiful_skills_analysis(resume_data):
     """Display skills analysis with beautiful badges"""
