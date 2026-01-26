@@ -2,17 +2,49 @@
 AI Resume Analyzer with Advanced NLP Features
 Revised version with FIXED parser integration and Beautiful UI
 """
-import spacy
-from spacy.util import is_package
-import subprocess
+
+import streamlit as st
 import sys
+import subprocess
+import os
 
-MODEL = "en_core_web_sm"
+# Page configuration
+st.set_page_config(
+    page_title="AI Resume Analyzer Pro",
+    page_icon='./static/images/logo.jpg',
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-if not is_package(MODEL):
-    subprocess.check_call([sys.executable, "-m", "spacy", "download", MODEL])
+# Check and download spaCy model
+try:
+    import spacy
+    from spacy.util import is_package
+    
+    # Try to load spaCy model
+    try:
+        nlp = spacy.load("en_core_web_sm")
+        st.success("✅ spaCy model loaded successfully")
+    except OSError:
+        st.warning("⚠️ Downloading spaCy model... This may take a minute.")
+        import subprocess
+        subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+        nlp = spacy.load("en_core_web_sm")
+        st.success("✅ spaCy model downloaded and loaded")
+        
+except ImportError as e:
+    st.error(f"❌ spaCy not available: {e}")
+    # Create a dummy nlp object
+    nlp = None
 
-nlp = spacy.load(MODEL)
+# Download NLTK data
+import nltk
+try:
+    nltk.download('stopwords', quiet=True)
+    nltk.download('punkt', quiet=True)
+    nltk.download('averaged_perceptron_tagger', quiet=True)
+except:
+    pass
 
 
 
@@ -28,10 +60,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# At the beginning of EnhancedSemanticMatcher.__init__(), add:
-import nltk
-nltk.download('stopwords', quiet=True)
-nltk.download('punkt', quiet=True)
 
 import pandas as pd
 import numpy as np
