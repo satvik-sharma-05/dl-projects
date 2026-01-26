@@ -17,7 +17,8 @@ class IndianContextProcessor:
     def __init__(self, use_spacy=True):
         """Initialize with real NLP and market data"""
         try:
-            self.nlp = spacy.load('en_core_web_sm') if use_spacy else None
+            from nlp_modules.spacy_loader import load_spacy_model
+            self.nlp = load_spacy_model("en_core_web_sm") if use_spacy else None
         except:
             print("⚠️ spaCy model not found. Using fallback.")
             self.nlp = None

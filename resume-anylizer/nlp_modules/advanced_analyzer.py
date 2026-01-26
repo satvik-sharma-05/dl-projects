@@ -20,7 +20,9 @@ import os
 class AdvancedResumeAnalyzer:
     def __init__(self, model_path='models/field_classifier.pkl'):
         """Initialize the advanced analyzer"""
-        self.nlp = spacy.load('en_core_web_sm')
+        from nlp_modules.spacy_loader import load_spacy_model
+        self.nlp = load_spacy_model("en_core_web_sm")
+
         self.stop_words = set(stopwords.words('english'))
         
         # Load or create models

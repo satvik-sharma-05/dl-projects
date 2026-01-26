@@ -15,7 +15,9 @@ class EnhancedResumeParser:
     def __init__(self):
         """Initialize enhanced resume parser"""
         try:
-            self.nlp = spacy.load("en_core_web_sm")
+            from nlp_modules.spacy_loader import load_spacy_model
+            self.nlp = load_spacy_model("en_core_web_sm")
+
         except:
             print("⚠️ spaCy model not found. Using fallback parsing only.")
             self.nlp = None
