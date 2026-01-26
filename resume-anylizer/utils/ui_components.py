@@ -120,7 +120,13 @@ def create_skill_badge(skill, category="default"):
         "soft": "#EC4899"
     }
     
-    color = category_colors.get(category, "#6B7280")
+    raw_color = category_colors.get(category, "#6B7280")
+
+    if isinstance(raw_color, dict):
+        color = raw_color.get("color", "#6B7280")
+    else:
+        color = raw_color
+
     
     return f"""
     <span style="
