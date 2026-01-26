@@ -1,4 +1,4 @@
-# ---------------- CORE SCI ----------------
+# ---------------- CORE ----------------
 numpy==1.24.4
 pandas==2.0.3
 scikit-learn==1.3.2
@@ -23,10 +23,6 @@ lxml==4.9.3
 streamlit==1.28.0
 streamlit-tags==1.2.8
 plotly==5.17.0
-
-# ---------------- DATABASE (OPTIONAL) ----------------
-pymysql==1.1.0
-sqlalchemy==2.0.23
 
 # ---------------- UTILITIES ----------------
 python-dotenv==1.0.0
