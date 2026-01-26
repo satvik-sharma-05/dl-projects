@@ -110,20 +110,16 @@ def create_progress_bar(label, value, color="#667eea"):
     """
 
 def create_skill_badges(skills, skill_color_map):
-    """Create beautiful skill badges (robust to string colors)"""
+    """Create beautiful skill badges (string-safe)"""
     badge_html = ""
 
     for skill in skills:
         skill_lower = skill.lower()
-
-        # Match color by keyword
         color = "#6B7280"  # default
+
         for keyword, value in skill_color_map.items():
             if keyword in skill_lower:
-                if isinstance(value, dict):
-                    color = value.get("color", "#6B7280")
-                else:
-                    color = value
+                color = value if isinstance(value, str) else value.get("color", "#6B7280")
                 break
 
         badge_html += f"""
@@ -137,13 +133,13 @@ def create_skill_badges(skills, skill_color_map):
             font-size: 0.9rem;
             font-weight: 500;
             border: 1px solid {color}30;
-            transition: all 0.3s ease;
         ">
             {skill.title()}
         </span>
         """
 
     return badge_html
+
 
 
 def create_feature_card(icon, title, description):
