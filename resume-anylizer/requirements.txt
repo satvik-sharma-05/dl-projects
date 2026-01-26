@@ -78,3 +78,5 @@ python-dotenv==1.0.0
 requests==2.31.0
 six==1.16.0
 typing-extensions==4.8.0
+
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.1/en_core_web_sm-3.6.1-py3-none-any.whl
