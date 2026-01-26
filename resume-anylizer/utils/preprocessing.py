@@ -28,7 +28,8 @@ class TextPreprocessor:
         if use_spacy:
             try:
                 from nlp_modules.spacy_loader import load_spacy_model
-                self.nlp = load_spacy_model("en_core_web_sm")
+                self.nlp = load_spacy_model()
+
 
             except:
                 print("spaCy model not found. Using NLTK only.")
