@@ -2,7 +2,8 @@
 AI Resume Analyzer Pro - Streamlit Cloud Compatible
 """
 from nlp_modules.spacy_loader import load_spacy_model
-load_spacy_model("en_core_web_sm")
+nlp = load_spacy_model()
+
 
 
 import streamlit as st
