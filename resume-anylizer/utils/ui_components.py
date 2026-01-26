@@ -109,40 +109,42 @@ def create_progress_bar(label, value, color="#667eea"):
     </div>
     """
 
-def create_skill_badge(skill, category="default"):
-    """Create a colored skill badge"""
-    category_colors = {
-        "programming": "#3B82F6",
-        "web": "#8B5CF6",
-        "data": "#10B981",
-        "cloud": "#F59E0B",
-        "tool": "#EF4444",
-        "soft": "#EC4899"
-    }
-    
-    raw_color = category_colors.get(category, "#6B7280")
+def create_skill_badges(skills, skill_color_map):
+    """Create beautiful skill badges (robust to string colors)"""
+    badge_html = ""
 
-    if isinstance(raw_color, dict):
-        color = raw_color.get("color", "#6B7280")
-    else:
-        color = raw_color
+    for skill in skills:
+        skill_lower = skill.lower()
 
-    
-    return f"""
-    <span style="
-        display: inline-block;
-        background: {color}15;
-        color: {color};
-        padding: 4px 12px;
-        border-radius: 20px;
-        margin: 4px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        border: 1px solid {color}30;
-    ">
-        {skill}
-    </span>
-    """
+        # Match color by keyword
+        color = "#6B7280"  # default
+        for keyword, value in skill_color_map.items():
+            if keyword in skill_lower:
+                if isinstance(value, dict):
+                    color = value.get("color", "#6B7280")
+                else:
+                    color = value
+                break
+
+        badge_html += f"""
+        <span style="
+            display: inline-block;
+            background: {color}15;
+            color: {color};
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid {color}30;
+            transition: all 0.3s ease;
+        ">
+            {skill.title()}
+        </span>
+        """
+
+    return badge_html
+
 
 def create_feature_card(icon, title, description):
     """Create a feature card for sidebar"""
