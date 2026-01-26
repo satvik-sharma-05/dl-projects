@@ -3,7 +3,18 @@ AI Resume Analyzer with Advanced NLP Features
 Revised version with FIXED parser integration and Beautiful UI
 """
 import spacy
-nlp = spacy.load("en_core_web_sm")
+from spacy.util import is_package
+import subprocess
+import sys
+
+MODEL = "en_core_web_sm"
+
+if not is_package(MODEL):
+    subprocess.check_call([sys.executable, "-m", "spacy", "download", MODEL])
+
+nlp = spacy.load(MODEL)
+
+
 
 
 
