@@ -490,39 +490,7 @@ def display_enhanced_metrics(match_results):
             delta="+" if overall_score >= 50 else "-"
         )
 
-def create_skill_badges(skills, category_colors):
-    """Create beautiful skill badges"""
-    badge_html = ""
-    for skill in skills:
-        category = None
-        skill_lower = skill.lower()
-        
-        # Determine category
-        for cat, keywords in category_colors.items():
-            if any(keyword in skill_lower for keyword in keywords):
-                category = cat
-                break
-        
-        color = category_colors.get(category, {"color": "#6B7280"})["color"]
-        
-        badge_html += f"""
-        <span style="
-            display: inline-block;
-            background: {color}15;
-            color: {color};
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin: 4px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid {color}30;
-            transition: all 0.3s ease;
-        ">
-            {skill.title()}
-        </span>
-        """
-    
-    return badge_html
+
 
 def display_beautiful_skills_analysis(resume_data):
     """Display skills analysis with beautiful badges"""
