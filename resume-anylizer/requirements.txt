@@ -20,8 +20,7 @@ Pillow==10.4.0
 # UTILITIES
 pymysql==1.1.2
 
-# DATA SCIENCE (optional - add these later if needed)
-# spacy==3.8.2
-# torch==2.5.1 --extra-index-url https://download.pytorch.org/whl/cpu
-# transformers==4.41.2
-# sentence-transformers==3.3.0
+spacy==3.8.2
+torch==2.5.1 --extra-index-url https://download.pytorch.org/whl/cpu
+transformers==4.41.2
+sentence-transformers==3.3.0
