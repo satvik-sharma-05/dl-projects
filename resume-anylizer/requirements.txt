@@ -1,35 +1,27 @@
-# CORE - Use newer versions that support Python 3.13
+# CORE
 streamlit==1.53.1
-numpy==2.0.0
-pandas==2.3.3
+numpy==1.26.4
+pandas==2.2.2
 scikit-learn==1.5.1
-scipy==1.14.0
 
 # NLP
-nltk==3.9.1
+nltk==3.8.1
 textblob==0.18.0
-spacy==3.8.11
-
-# TRANSFORMERS - Use versions without torch or CPU-only
-# Remove torch for now - it's causing issues
-# torch==2.5.1
-transformers==4.41.2
-sentence-transformers==3.3.0
 
 # PARSING
-pdfminer.six==20241104
+pdfminer.six==20221105
 python-docx==1.2.0
-lxml==5.3.0
 
 # VISUALIZATION
 plotly==6.5.2
 streamlit-tags==1.2.8
-
-# UTILITIES
-joblib==1.4.2
-tqdm==4.66.6
-pymysql==1.1.2
 Pillow==10.4.0
 
-# Don't specify spaCy model in requirements - download it in code
-# en-core-web-sm will be downloaded separately
+# UTILITIES
+pymysql==1.1.2
+
+# REMOVE THESE FOR NOW - They cause Python 3.13 issues:
+# spacy
+# torch
+# transformers
+# sentence-transformers

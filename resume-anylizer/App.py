@@ -1,64 +1,35 @@
 """
-AI Resume Analyzer with Advanced NLP Features
-Revised version with FIXED parser integration and Beautiful UI
+AI Resume Analyzer Pro - Streamlit Cloud Compatible
 """
 
 import streamlit as st
 import sys
-import subprocess
 import os
 
 # Page configuration
 st.set_page_config(
     page_title="AI Resume Analyzer Pro",
     page_icon='./static/images/logo.jpg',
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
-# Check and download spaCy model
+# Check Python version
+python_version = sys.version_info
+st.sidebar.info(f"Python {python_version.major}.{python_version.minor}.{python_version.micro}")
+
+# Import core libraries
 try:
-    import spacy
-    from spacy.util import is_package
-    
-    # Try to load spaCy model
-    try:
-        nlp = spacy.load("en_core_web_sm")
-        st.success("✅ spaCy model loaded successfully")
-    except OSError:
-        st.warning("⚠️ Downloading spaCy model... This may take a minute.")
-        import subprocess
-        subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
-        nlp = spacy.load("en_core_web_sm")
-        st.success("✅ spaCy model downloaded and loaded")
-        
+    import numpy as np
+    import pandas as pd
+    import plotly.express as px
+    import plotly.graph_objects as go
+    CORE_LIBS_AVAILABLE = True
 except ImportError as e:
-    st.error(f"❌ spaCy not available: {e}")
-    # Create a dummy nlp object
-    nlp = None
-
-# Download NLTK data
-import nltk
-try:
-    nltk.download('stopwords', quiet=True)
-    nltk.download('punkt', quiet=True)
-    nltk.download('averaged_perceptron_tagger', quiet=True)
-except:
-    pass
+    st.error(f"Core library missing: {e}")
+    CORE_LIBS_AVAILABLE = False
 
 
 
-
-
-import streamlit as st
-
-# Page configuration
-st.set_page_config(
-    page_title="AI Resume Analyzer Pro",
-    page_icon='./static/images/logo.jpg',
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 
 import pandas as pd
