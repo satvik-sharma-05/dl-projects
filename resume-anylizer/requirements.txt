@@ -16,10 +16,9 @@ textblob==0.17.1
 regex==2023.10.3
 
 ################################
-# spaCy (PYTHON 3.10 SAFE)
+# spaCy (ENGINE ONLY — NO MODEL)
 ################################
 spacy==3.6.1
-en-core-web-sm==3.6.0
 
 ################################
 # TRANSFORMERS (CPU SAFE)
@@ -62,7 +61,7 @@ pymysql==1.1.0
 sqlalchemy==2.0.23
 
 ################################
-# CONFIG / UTIL
+# UTIL
 ################################
 pyyaml==6.0.1
 python-dotenv==1.0.0
